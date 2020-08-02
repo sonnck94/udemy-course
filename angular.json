@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "udemy-course"
+    }
+  },
+  "defaultProject": "udemy-course",
+  "cli": {
+    "analytics": false
+  }
 }
