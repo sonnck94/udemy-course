@@ -7,14 +7,14 @@ import { RecipeService } from '../../recipe.service';
   selector: 'app-recipe-item',
   templateUrl: './recipe-item.component.html',
   styleUrls: ['./recipe-item.component.css'],
-  // providers: [LoggingService]
 })
 export class RecipeItemComponent implements OnInit {
   @Input() recipe: Recipe;
 
   constructor(private loggingService: LoggingService, private recipeService: RecipeService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    console.log(this.recipeService.recipeSelected.observers.length);
   }
 
   onSelect(){
