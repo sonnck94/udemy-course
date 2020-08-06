@@ -17,6 +17,6 @@ export class RecipeService{
   recipeSelected = new EventEmitter<Recipe>(); // default property is public
 
   getRecipes(){
-    return this.recipes.slice();
+    return [...this.recipes];
   }
 }

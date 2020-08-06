@@ -14,7 +14,7 @@ export class RecipeItemComponent implements OnInit {
   constructor(private loggingService: LoggingService, private recipeService: RecipeService) { }
 
   ngOnInit() {
-    console.log(this.recipeService.recipeSelected.observers.length);
+    console.log("recipeService: ", this.recipeService);
   }
 
   onSelect(){
