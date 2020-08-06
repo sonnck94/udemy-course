@@ -6,19 +6,21 @@
     <h5>{{ recipe.name }}</h5>
   </div>
   <div class="row">
-    <div class="dropdown">
-      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Manager recipe
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Shopping list</a>
-        <a class="dropdown-item" href="#">Edit</a>
-        <a class="dropdown-item" href="#">Delete</a>
-      </div>
+    <div class="col-12">
+      <span><b>Manager recipe: </b></span>
+      <a style="cursor: pointer;" class="text-primary" (click)="addToShoppingList()">Shopping list</a>
+      | <a href="#">Edit</a>
+      | <a href="#">Delete</a>
     </div>
   </div>
   <p>Description: {{ recipe.description }}</p>
-  <p>Ingredients</p>
+  <div class="">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients">
+        {{ ingredient.name }} <span class="badge badge-pill badge-primary"> {{ ingredient.amount }}</span>
+      </li>
+    </ul>
+  </div>
   <button appDropdown class="btn btn-secondary">Show</button>
   <p>recipe-detail works!</p>
 </div>
