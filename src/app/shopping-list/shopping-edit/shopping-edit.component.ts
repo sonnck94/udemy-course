@@ -23,7 +23,7 @@ export class ShoppingEditComponent implements OnInit {
       this.ingredientAmoutRef.nativeElement.value,
     );
 
-    this.shoppingListService.addIngredient.emit(ingredient)
+    this.shoppingListService.addIngredient(ingredient)
     this.onClear();
   }
   onClear(){
