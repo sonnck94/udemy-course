@@ -6,6 +6,7 @@ import { Recipe } from './recipe.model';
 export class RecipeService{
   private recipes: Recipe[] = [
     new Recipe(
+      1,
       'A Test recipe',
       'Recipe description',
       'https://www.bbcgoodfood.com/sites/default/files/recipe-collections/collection-image/2013/05/chorizo-mozarella-gnocchi-bake-cropped.jpg',
@@ -15,6 +16,7 @@ export class RecipeService{
       ]
     ),
     new Recipe(
+      2,
       'A Test recipe 2',
       'Recipe description',
       'https://www.bbcgoodfood.com/sites/default/files/recipe-collections/collection-image/2013/05/chorizo-mozarella-gnocchi-bake-cropped.jpg',
@@ -31,6 +33,10 @@ export class RecipeService{
   getRecipes(){
     return [...this.recipes];
   }
+  getRecipe(id: number){
+    return this.recipes.find(recipe => recipe.id === id);
+  }
+
   addIngredientsToShoppingList(ingredients: Ingredient[]){
     console.log("RecipeService:addIngredientsToShoppingList:", ingredients);
 
