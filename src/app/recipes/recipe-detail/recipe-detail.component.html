@@ -10,7 +10,7 @@
       <span><b>Manager recipe: </b></span>
       <a style="cursor: pointer;" class="text-primary" (click)="addToShoppingList()">Shopping list</a>
       | <a [routerLink]="['edit']">Edit</a>
-      | <a href="#">Delete</a>
+      | <a style="cursor: pointer;" class="text-primary" (click)="onDelete()">Delete</a>
     </div>
   </div>
   <p>Description: {{ recipe.description }}</p>
