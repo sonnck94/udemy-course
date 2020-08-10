@@ -33,14 +33,9 @@ export class ShoppingListService{
     this.ingredientsChanged.next([...this.ingredients]);
   }
   deleleIngredient(idx: number){
-    console.log("index", idx);
-    
     if(this.ingredients[idx]){
-      let a = this.ingredients.splice(idx,1);
-      console.log(a);
-      console.log(this.ingredients);
-            
-      // this.ingredientsChanged.next([...this.ingredients])
+      this.ingredients.splice(idx,1);
+      this.ingredientsChanged.next([...this.ingredients])
     }
   }
 }
