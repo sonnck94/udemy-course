@@ -7,31 +7,36 @@ import { Subject } from 'rxjs';
 export class RecipeService{
   recipesChanged = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [
-    new Recipe(
-      1,
-      'A Test recipe',
-      'Recipe description',
-      'https://www.bbcgoodfood.com/sites/default/files/recipe-collections/collection-image/2013/05/chorizo-mozarella-gnocchi-bake-cropped.jpg',
-      [
-        new Ingredient("Meat", 1),
-        new Ingredient("French Fries", 20),
-      ]
-    ),
-    new Recipe(
-      2,
-      'A Test recipe 2',
-      'Recipe description',
-      'https://www.bbcgoodfood.com/sites/default/files/recipe-collections/collection-image/2013/05/chorizo-mozarella-gnocchi-bake-cropped.jpg',
-      [
-        new Ingredient("Buns", 1),
-        new Ingredient("Meat", 1),
-      ]
-    ),
-  ];
+  // private recipes: Recipe[] = [
+  //   new Recipe(
+  //     1,
+  //     'A Test recipe',
+  //     'Recipe description',
+  //     'https://placedog.net/200',
+  //     [
+  //       new Ingredient("Meat", 1),
+  //       new Ingredient("French Fries", 20),
+  //     ]
+  //   ),
+  //   new Recipe(
+  //     2,
+  //     'A Test recipe 2',
+  //     'Recipe description',
+  //     'https://placedog.net/200',
+  //     [
+  //       new Ingredient("Buns", 1),
+  //       new Ingredient("Meat", 1),
+  //     ]
+  //   ),
+  // ];
+  private recipes: Recipe[] = [];
 
   constructor(private slService: ShoppingListService){};
 
+  setRecipes(recipes: Recipe[]){
+    this.recipes = recipes;
+    this.recipesChanged.next([...this.recipes])
+  }
   getRecipes(){
     return [...this.recipes];
   }

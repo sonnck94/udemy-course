@@ -48,7 +48,7 @@
           <hr>
           <div class="form-group" formArrayName="ingredients">
             <div class="row mt-1"
-              *ngFor="let ingredient of recipeForm.get('ingredients').controls; let i = index"
+              *ngFor="let ingredient of recipeForm.get('ingredients')['controls']; let i = index"
               [formGroupName]="i">
               <div class="col-8">
                 <input
