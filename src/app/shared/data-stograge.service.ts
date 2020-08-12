@@ -21,16 +21,9 @@ export class DataStorageService{
       );
   }
   getRicepes(){
-    return this.authService.user.pipe(
-      take(1),
-      exhaustMap(user => {
-        return this.http.get<Recipe[]>(
-          'https://angular-2ce4e.firebaseio.com/recipes.json',
-          {
-            params: new HttpParams().set('auth', user.token)
-          }
-        );
-      }),
+    return this.http.get<Recipe[]>(
+      'https://angular-2ce4e.firebaseio.com/recipes.json',
+    ).pipe(
       map(recipes => {
         return recipes.map(recipe => {
           return {
@@ -42,6 +35,6 @@ export class DataStorageService{
       tap(recipes => {
         this.recipeService.setRecipes(recipes);
       })
-    );
+    )
   }
 }
