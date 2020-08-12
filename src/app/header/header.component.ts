@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
   }
 
   onLogOut(){
-    this.isAuthenticated = false;
+    this.authService.logout();
   }
 
   onSaveData(){
