@@ -6,24 +6,34 @@
 
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item" [routerLinkActive]="'active'">
+      <li class="nav-item" [routerLinkActive]="'active'" *ngIf="isAuthenticated">
         <a class="nav-link" routerLink="/recipes">Recipes <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item" [routerLinkActive]="'active'">
         <a class="nav-link" routerLink="/shopping-list">Shopping list</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="isAuthenticated">
         <a 
           class="nav-link"
           style="cursor: pointer;"
           (click)="onSaveData()"
         >Save data</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="isAuthenticated">
         <a 
           class="nav-link"
           style="cursor: pointer;"
         (click)="onFetchData()">Fetch data</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="'active'" *ngIf="!isAuthenticated">
+        <a class="nav-link" routerLink="/auth">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="isAuthenticated">
+        <a 
+          class="nav-link"
+          style="cursor: pointer;"
+          (click)="onLogOut()"
+        >Logout</a>
       </li>
     </ul>
   </div>
