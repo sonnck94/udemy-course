@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { User } from './user.model';
 import { catchError, tap } from 'rxjs/operators';
-import { throwError, Subject } from 'rxjs';
+import { throwError, Subject, BehaviorSubject } from 'rxjs';
 
 const FIREBASE_WEBKEY = 'AIzaSyCaa5bmclTXeFMyFCBIu2G5SEFUr9PPenA';
 export interface AuthResData {
@@ -15,11 +15,9 @@ export interface AuthResData {
     registered?: boolean,
 }
 
-@Injectable({
-    providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService{
-    userSubject = new Subject<User>();
+    user = new BehaviorSubject<User>(null);
 
     constructor(private http: HttpClient){
     }
@@ -34,8 +32,13 @@ export class AuthService{
                 return throwError(err);
             }),
             tap(resData => {
-                this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn,)
-            })
+                this.handleAuthentication(
+                  resData.email,
+                  resData.localId,
+                  resData.idToken,
+                  +resData.expiresIn
+                );
+              })
         )
     }
 
@@ -49,20 +52,25 @@ export class AuthService{
                 return throwError(err)
             }),
             tap(resData => {
-                this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn,)
+                this.handleAuthentication(
+                    resData.email,
+                    resData.localId,
+                    resData.idToken,
+                    +resData.expiresIn,
+                )
             })
         )
     }
-    private handleAuthentication(email: string, userId: string, token: string, expiresIn: number){
-        const expireDate = new Date(new Date().getTime() + expiresIn + 1000);
-        const user = new User(
-            email,
-            userId,
-            token,
-            expireDate,
-        );
-        this.userSubject.next(user); 
-    }
+    private handleAuthentication(
+        email: string,
+        userId: string,
+        token: string,
+        expiresIn: number
+      ) {
+        const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+        const user = new User(email, userId, token, expirationDate);
+        this.user.next(user);
+      }
     handleError(err){
         if(!err.error.error){
             return 'Unknow error occur!';

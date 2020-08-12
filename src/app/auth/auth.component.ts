@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -12,7 +12,9 @@ import { Subscription, Observable } from 'rxjs';
     templateUrl: './auth.component.html',
     styleUrls: ['./auth.component.css'],
 })
-export class AuthComponent{
+export class AuthComponent implements OnInit{
+    @ViewChild('authForm') authForm: NgForm;
+
     isLoginMode: boolean = true;
     error = null;
     authObs: Observable<AuthResData>;
@@ -20,6 +22,14 @@ export class AuthComponent{
     constructor(private authService: AuthService,
         private router: Router){}
 
+    ngOnInit(){
+        setTimeout(() =>{
+            this.authForm.setValue({
+                email: 'dangngocson94@gmail.com',
+                password: '123456',
+            })
+        })
+    }    
     onSubmit(authForm: NgForm){
         if(this.isLoginMode){
             this.authObs = this.authService.logIn(authForm.value.email, authForm.value.password);
