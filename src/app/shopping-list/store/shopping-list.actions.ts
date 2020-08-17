@@ -15,31 +15,31 @@ export class AddIngredient implements Action{
 }
 
 export class AddIngredients implements Action{
-  type = ADD_INGREDIENTS;
+  readonly type = ADD_INGREDIENTS;
 
   constructor(public payload: Ingredient[]){}
 }
 
 export class UpdateIngredient implements Action{
-  type = UPDATE_INGREDIENT
+  readonly type = UPDATE_INGREDIENT
   
   constructor(public payload: Ingredient){}
 }
 
 export class DeleteIngredient implements Action{
-  type = DELETE_INGREDIENT;
+  readonly type = DELETE_INGREDIENT;
 
   constructor(public payload?){}
 }
 
 export class StartEdit implements Action{
-  type = START_EDIT
+  readonly type = START_EDIT
 
   constructor(public payload: number){}
 }
 
 export class StopEdit implements Action{
-  type = STOP_EDIT;
+  readonly type = STOP_EDIT;
   constructor(public payload: any | null){}
 }
 
