@@ -23,13 +23,13 @@ export class AddIngredients implements Action{
 export class UpdateIngredient implements Action{
   type = UPDATE_INGREDIENT
   
-  constructor(public payload: {idx: number, ingredient: Ingredient}){}
+  constructor(public payload: Ingredient){}
 }
 
 export class DeleteIngredient implements Action{
   type = DELETE_INGREDIENT;
 
-  constructor(public payload: number){}
+  constructor(public payload?){}
 }
 
 export class StartEdit implements Action{
@@ -40,6 +40,7 @@ export class StartEdit implements Action{
 
 export class StopEdit implements Action{
   type = STOP_EDIT;
+  constructor(public payload: any | null){}
 }
 
 export type ShoppingListActionsTypes = 

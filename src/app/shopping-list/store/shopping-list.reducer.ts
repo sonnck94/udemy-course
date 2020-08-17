@@ -41,19 +41,20 @@ export function shoppingListReducer(
             ...action.payload,
           ]
         }
-      case ShoppingListActions.UPDATE_INGREDIENT:
-        let updatedIngredient = state.ingredients[action.payload.idx];
-        console.log("action.payload.idx", action.payload.idx);
-        updatedIngredient = {...action.payload.ingredient}
+      case ShoppingListActions.UPDATE_INGREDIENT:        
+        let updatedIngredient = state.ingredients[state.editedIngredientIdx];
+        updatedIngredient = {...action.payload}
         let ingredients = [...state.ingredients];
-        ingredients[action.payload.idx] = updatedIngredient;
+        ingredients[state.editedIngredientIdx] = updatedIngredient;
 
         return {
           ...state,
           ingredients: ingredients,
+          editedIngredient: null,
+          editedIngredientIdx: -1,
         }
       case ShoppingListActions.DELETE_INGREDIENT:
-        let newIngredients = state.ingredients.filter((i, idx) => idx !== action.payload);
+        let newIngredients = state.ingredients.filter((i, idx) => idx !== state.editedIngredientIdx);
 
         return {
           ...state,
@@ -61,11 +62,9 @@ export function shoppingListReducer(
         }
       case ShoppingListActions.START_EDIT:
         let idx = action.payload;
-        let ingredient = state.ingredients[idx];
-
         return {
           ...state,
-          editedIngredient: {...ingredient},
+          editedIngredient: {...state.ingredients[idx] },
           editedIngredientIdx: idx,
         }
       case ShoppingListActions.STOP_EDIT:
